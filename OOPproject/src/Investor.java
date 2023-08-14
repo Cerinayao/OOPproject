@@ -9,19 +9,36 @@ public class Investor implements Serializable {
     private List<Order> orderBook;
     private List<Stock> portfolio;
     private StockMarket stockMarket;
-
+    
     public Investor(String investorName) {
         this.investorName = investorName;
         this.orderBook = deserializeOrderBook();
         this.portfolio = deserializePortfolio();
         this.stockMarket = StockMarket.deserializeStockMarket(); // Note the change here
     }
-
-    public void placeOrder(String type, String stockName, double targetPrice, int volume) {
-        Order order = new Order(type, targetPrice, volume, stockName, investorName);
-        orderBook.add(order);
+    
+    public void placeOrder(String type,double price, String stockName, int volume) {
+        Order order = new Order(type, price,volume, stockName, investorName);
+        addToOrderBook(order);
     }
-
+    
+    public void addToOrderBook(Order order) {
+    	orderBook.add(order);
+    }
+    public void RemoveFromOrderBook(Order order) {
+    	for(Order o: orderBook) {
+    		if (order.getInvestorName().equals(o.getInvestorName())
+    				& order.getVolume()==o.getVolume()
+    				& order.getTargetPrice()==o.getTargetPrice()
+    				& order.getStockName().equals(o.getStockName())
+    				& order.getType().equals(o.getType()) ) {
+    			orderBook.remove(o);
+    			break;
+    		}
+    	}
+    	
+    }
+    
     public void addToPortfolio(String stockName, StockMarket stockMarket) {
         boolean alreadyExists = false;
         for (Stock stock : portfolio) {
@@ -30,6 +47,7 @@ public class Investor implements Serializable {
                 break;
             }
         }
+        
         if (!alreadyExists) {
             double price = 0; // Default price if stock not found in stock market
             for (Stock stock : stockMarket.getStockList()) {
@@ -52,6 +70,7 @@ public class Investor implements Serializable {
             }
         }
     }
+    
     public void sellFromPortfolio(String stockName, int volume) {
         for (Stock stock : portfolio) {
             if (stock.getStockName().equals(stockName)) {
@@ -63,10 +82,14 @@ public class Investor implements Serializable {
             }
         }
     }
-    public void viewPorfolio() {
+    
+    public void viewPortfolio() {
         System.out.println("Portfolio:");
         for (Stock stock : portfolio){
             System.out.println(stock.toString());
+        }
+        if (portfolio.size()==0) {
+        	System.out.println("Empty Portfolio");
         }
     }
     
@@ -96,13 +119,12 @@ public class Investor implements Serializable {
         try (FileOutputStream fileOut = new FileOutputStream(fileName);
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(orderBook);
-            System.out.println("Order book serialized to " + fileName);
+//            System.out.println("Order book serialized to " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    
     public List<Order> deserializeOrderBook() {
         String fileName = "OrderBook.ser";
         List<Order> deserializedOrderBook = new ArrayList<>();
@@ -152,7 +174,6 @@ public class Investor implements Serializable {
     	serializePortfolio();
     	serializeOrderBook();
     	stockMarket.serializeStockMarket();
-    	
     }
 
 

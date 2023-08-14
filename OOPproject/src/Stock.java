@@ -27,9 +27,14 @@ public class Stock implements Serializable {
         applyRandomMarketVolatility();
     }
 
-    private void applyRandomMarketVolatility() {
+    public void applyRandomMarketVolatility() {
         double volatilityFactor = 1 + (random.nextDouble() - 0.5) * 0.1; // Adjust volatility range as needed
         price *= volatilityFactor;
+    }
+    public double randomPrice() {
+    	 double volatilityFactor = 1 + (random.nextDouble() - 0.5) * 0.1; // Adjust volatility range as needed
+         price *= volatilityFactor;
+         return price;
     }
 
     public double getPrice() {
@@ -56,12 +61,17 @@ public class Stock implements Serializable {
         this.volume = volume;
     }
 
-    @Override
+    
+
+  public String toStringportfolio() {
+  return  stockName  +
+          "," + volume ;
+          
+}
     public String toString() {
-        return "Stock{" +
-                "stockName='" + stockName + '\'' +
-                ", price=" + price +
-                ", volume=" + volume +
-                '}';
-    }
+    	  return  stockName  +","+price+
+    	          "," + volume ;
+    	          
+    	}
+    
 }

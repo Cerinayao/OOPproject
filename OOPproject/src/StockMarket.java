@@ -25,6 +25,14 @@ public class StockMarket implements Serializable {
     public ArrayList<Stock> getStockList() {
         return StockList;
     }
+    public Stock getStock(String stockName) {
+    	for (Stock stock : this.getStockList()) {
+            if (stock.getStockName().equals(stockName)) {
+            	return stock;
+            }
+    	}
+    	return null;
+    }
     
     public void setStockList(ArrayList<Stock> stockList) {
         StockList = stockList;
@@ -59,7 +67,7 @@ public class StockMarket implements Serializable {
             return newStockMarket;
         }
     }
-
+    
 
     public void serializeStockMarket() {
         String fileName = "StockMarket.ser";
