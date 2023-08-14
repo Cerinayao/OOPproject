@@ -1,0 +1,51 @@
+# Stock Trading System
+
+Welcome to the Stock Trading System repository! This system is designed to simulate a stock trading platform, allowing investors to place buy and sell orders for stocks in a virtual market. The system is implemented using Object-Oriented Programming (OOP) principles and features a graphical user interface (GUI) for user interaction.
+
+## Table of Contents
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [System Components](#system-components)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+- Investors can place buy and sell orders for stocks.
+- Order book displays pending orders for execution.
+- Broker executes orders based on stock market conditions.
+- GUI provides a user-friendly interface for placing orders and viewing portfolio.
+- Stock market simulator applies random market volatility.
+
+## Getting Started
+
+### Prerequisites
+- Java Development Kit (JDK)
+- IDE (Eclipse, IntelliJ, etc.)
+
+### Installation
+1. Clone this repository to your local machine.
+2. Open the project in your preferred IDE.
+
+## Usage
+1. Run the main application class (`MainApp`) to launch the Stock Trading System.
+2. The GUI interface will provide options to place buy and sell orders.
+3. The order book displays pending orders and their execution status.
+4. The broker executes orders based on market conditions.
+5. View your portfolio and monitor changes in stock prices.
+
+## System Components
+The Stock Trading System consists of the following components:
+- **Investor:** Represents an individual investor, manages orders and portfolio.
+- **Broker:** Executes orders based on market conditions.
+- **Order:** Represents a buy or sell order with relevant details.
+- **Stock:** Represents a stock with price, name, and volume.
+- **StockMarket:** Simulates the stock market with a list of stocks and order execution.
+
+## Contributing
+Contributions are welcome! If you find any issues or want to enhance the system, feel free to fork the repository and submit pull requests.
+
+## License
+This project is licensed under the [MIT License](LICENSE).
